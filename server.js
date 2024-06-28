@@ -5,13 +5,42 @@ const path = require('path');
 //Aca inicia el server, llamado app  
 const app = express(); //El framework(node) tiene un constructor definido express() el cual se encarga de inicializar los procesos que se necesitan.
 const PORT = 3000; // Si el puerto queda en una constante, es facil de acceder por que esta fijo. (Poner el puerto como const es opcional)
+const PUBLIC = path.join(__dirname,'public'); // __dirname esta declarada global en nodejs
+
+
+
 
 app.use(express.urlencoded({ extended: true })); //El metodo use() es un metodo que recibe configuracion
+app.use(express.static(PUBLIC));  
+
 
 app.get('/', (req, res) => {
-    console.log('Loading Home...');
-    res.send('Hello World');
+    console.log('Loading Home...\n');
+    res.sendFile(path.join(PUBLIC,'home.html'));
 }); // Cuando el cliente haga un get del servidor, de la ruta (/), el servidor cargara el mensaje loading home y se le devolvera el hello world
+
+app.get('/contactus',(req,res) => {
+    console.log('Loading contact us...');
+    res.sendFile(path.join(PUBLIC,'contactus.html'))
+});
+
+app.post('/contactus', (req , res) => {
+    console.info('Contact Us has been called...\n');
+    const name = req.body.name;
+    const email = req.body.email;
+    const subject = req.body.subject;
+
+    console.log('Form data\n');
+    console.log('Name: ' + name);
+    console.log('Email: ' + email);
+    console.log('Subject: ' + subject);
+
+    res.redirect('/')
+
+} );
+
+
+
 
 app.listen(PORT, () => {
     console.log('✅ Server is running on port ' + PORT );

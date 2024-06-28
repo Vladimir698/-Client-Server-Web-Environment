@@ -7,8 +7,8 @@
 </head>
 <body>
     <div>
-        <h1>Contact Us</h1>
-        <form >
+        <a href="/">Back to Home</a>
+        <form action="/contactus" method="post">
             <label for="name">Name</label>
             <input type="text" id="name" name="name" required>
 
@@ -16,9 +16,10 @@
             <input type="email" id="email" name="email" required>
 
             <label for="subject">Name</label>
-            <textarea  id="subject" name="subject" required rows="5">
+            <textarea  id="subject" name="subject" required rows="5"></textarea>
 
-            <button type="submit">Send</button>                
+            <button type="submit">Send</button>    
+            <button type="reset">Clear</button>         
         </form>
     </div>
 </body>
